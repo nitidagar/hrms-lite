@@ -1,0 +1,21 @@
+{
+  "name": "hrms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hrms.js",
+  "scripts": {
+    "start": "node hrms.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.2.4",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.1.0"
+  }
+}

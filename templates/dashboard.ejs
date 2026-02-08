@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - HRMS Lite</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Dashboard</h2>
+      <p>Quick summary of HRMS Lite</p>
+
+      <div class="actions">
+        <div class="card">
+          <h3>Total Employees</h3>
+          <p><%= totalEmployees %></p>
+        </div>
+
+        <div class="card">
+          <h3>Total Attendance Records</h3>
+          <p><%= totalAttendance %></p>
+        </div>
+
+        <div class="card">
+          <h3>Total Present Entries</h3>
+          <p><%= totalPresent %></p>
+        </div>
+      </div>
+
+      <br>
+      <a href="/" class="btn">⬅ Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

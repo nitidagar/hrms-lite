@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Management</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Attendance Management</h2>
+      <p>Mark and view daily attendance of employees</p>
+
+      <!-- Filter -->
+      <form method="GET" action="/attendance" class="form">
+        <div class="form-group">
+          <label for="filter-date">Filter by Date</label>
+          <input 
+            type="date" 
+            id="filter-date" 
+            name="date" 
+            value="<%= filterDate || '' %>">
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary">Filter</button>
+          <a href="/attendance" class="btn">Clear Filter</a>
+        </div>
+      </form>
+
+      <hr />
+
+      <% if (!employees || employees.length === 0) { %>
+        <p>No employees found.</p>
+      <% } %>
+
+      <% employees.forEach(emp => { %>
+        <div class="employee-attendance">
+          <h3><%= emp.fullName %> (<%= emp.employeeId %>)</h3>
+
+          <% if (!emp.attendance || emp.attendance.length === 0) { %>
+            <p>No attendance records for this date.</p>
+          <% } else { %>
+            <ul>
+              <% emp.attendance.forEach(rec => { %>
+                <li>
+                  <strong><%= rec.date %>:</strong> <%= rec.status %>
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
+
+          <%
+            const presentCount = (emp.attendance || []).filter(a => a.status === "Present").length;
+          %>
+          <p><strong>Total Present Days:</strong> <%= presentCount %></p>
+
+          <!-- Mark attendance form -->
+          <form method="POST" action="/attendance" class="form">
+            <input type="hidden" name="employeeId" value="<%= emp.employeeId %>">
+
+            <div class="form-group">
+              <label for="date-<%= emp.employeeId %>">Date</label>
+              <input 
+                type="date" 
+                id="date-<%= emp.employeeId %>" 
+                name="date" 
+                required>
+            </div>
+
+            <div class="form-group">
+              <label for="status-<%= emp.employeeId %>">Status</label>
+              <select id="status-<%= emp.employeeId %>" name="status" required>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Mark Attendance</button>
+            </div>
+          </form>
+
+          <hr />
+        </div>
+      <% }) %>
+
+      <div class="footer">
+        <a href="/" class="btn">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
